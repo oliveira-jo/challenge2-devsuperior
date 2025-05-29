@@ -1,9 +1,12 @@
 package com.devjoliveira.challenge2_devsuperior.entities;
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -14,6 +17,9 @@ public class Category {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
   private String description;
+
+  @OneToMany(mappedBy = "category")
+  private List<Activity> activities;
 
   public Category() {
 
@@ -38,6 +44,10 @@ public class Category {
 
   public void setDescription(String description) {
     this.description = description;
+  }
+
+  public List<Activity> getActivities() {
+    return this.activities;
   }
 
   @Override
