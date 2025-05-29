@@ -7,6 +7,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -21,6 +23,10 @@ public class Block {
   private Instant momentStar;
   @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
   private Instant momentEnd;
+
+  @ManyToOne
+  @JoinColumn(name = "activity_id")
+  private Activity activity;
 
   public Block() {
   }

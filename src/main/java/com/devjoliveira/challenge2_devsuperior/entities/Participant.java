@@ -1,9 +1,15 @@
 package com.devjoliveira.challenge2_devsuperior.entities;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -16,6 +22,10 @@ public class Participant {
   private String name;
   private String email;
 
+  @ManyToMany
+  @JoinTable(name = "tb_participant_activity", joinColumns = @JoinColumn(name = "participant_id"), inverseJoinColumns = @JoinColumn(name = "activity_id"))
+  private Set<Activity> activities = new HashSet<>();
+
   public Participant() {
 
   }
@@ -24,6 +34,10 @@ public class Participant {
     this.id = id;
     this.name = name;
     this.email = email;
+  }
+
+  public Set<Activity> getActivities() {
+    return activities;
   }
 
   public Integer getId() {
