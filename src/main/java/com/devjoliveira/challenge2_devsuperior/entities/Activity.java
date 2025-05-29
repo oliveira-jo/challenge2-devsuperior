@@ -5,11 +5,13 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
@@ -23,6 +25,8 @@ public class Activity {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
   private String name;
+
+  @Column(columnDefinition = "TEXT")
   private String description;
   private Double price;
 
@@ -33,7 +37,8 @@ public class Activity {
   @OneToMany(mappedBy = "activity")
   private List<Block> blocks = new ArrayList<>();
 
-  @ManyToMany(mappedBy = "activities")
+  @ManyToMany
+  @JoinTable(name = "tb_activity_participant", joinColumns = @JoinColumn(name = "activity_id"), inverseJoinColumns = @JoinColumn(name = "participant_id"))
   private Set<Participant> participants = new HashSet<>();
 
   public Activity() {
@@ -44,14 +49,6 @@ public class Activity {
     this.name = name;
     this.description = description;
     this.price = price;
-  }
-
-  public List<Block> getBlocks() {
-    return blocks;
-  }
-
-  public Set<Participant> getParticipants() {
-    return participants;
   }
 
   public Integer getId() {
@@ -92,6 +89,14 @@ public class Activity {
 
   public void setCategory(Category category) {
     this.category = category;
+  }
+
+  public List<Block> getBlocks() {
+    return blocks;
+  }
+
+  public Set<Participant> getParticipants() {
+    return participants;
   }
 
   @Override

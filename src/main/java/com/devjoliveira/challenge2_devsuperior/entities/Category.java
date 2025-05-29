@@ -1,5 +1,6 @@
 package com.devjoliveira.challenge2_devsuperior.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.Entity;
@@ -19,7 +20,7 @@ public class Category {
   private String description;
 
   @OneToMany(mappedBy = "category")
-  private List<Activity> activities;
+  private List<Activity> activities = new ArrayList<>();
 
   public Category() {
 
