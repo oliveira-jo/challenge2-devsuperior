@@ -16,9 +16,3 @@ Deseja-se construir um sistema para gerenciar as informações dos participantes
 ### Instância dos dados para seeding
 
 ![Seed Diagram](src/main/resources/img/seed-diagram.png)
-
-**Serviço OrderService:** responsável por operações referentes a pedidos.
-Serviço ShippingService: responsável por operações referentes a frete.
-Sua solução deverá ser implementada em Java com Spring Boot. A saída deverá ser mostrada no log
-do terminal da aplicação. Cada serviço deve ser implementado como um componente registrado com
-@Service.
