@@ -1,5 +1,8 @@
 package com.devjoliveira.challenge2_devsuperior.entities;
 
+import java.time.Instant;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -7,24 +10,25 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "tb_activity")
-public class Activity {
+@Table(name = "tb_block")
+public class Block {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
-  private String name;
-  private String description;
-  private Double price;
 
-  public Activity() {
+  @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
+  private Instant momentStar;
+  @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
+  private Instant momentEnd;
+
+  public Block() {
   }
 
-  public Activity(Integer id, String name, String description, Double price) {
+  public Block(Integer id, Instant star, Instant end) {
     this.id = id;
-    this.name = name;
-    this.description = description;
-    this.price = price;
+    this.momentStar = star;
+    this.momentEnd = end;
   }
 
   public Integer getId() {
@@ -35,28 +39,20 @@ public class Activity {
     this.id = id;
   }
 
-  public String getName() {
-    return name;
+  public Instant getMomentStar() {
+    return momentStar;
   }
 
-  public void setName(String name) {
-    this.name = name;
+  public void setMomentStar(Instant star) {
+    this.momentStar = star;
   }
 
-  public String getDescription() {
-    return description;
+  public Instant getMomentEnd() {
+    return momentEnd;
   }
 
-  public void setDescription(String description) {
-    this.description = description;
-  }
-
-  public Double getPrice() {
-    return price;
-  }
-
-  public void setPrice(Double price) {
-    this.price = price;
+  public void setMomentEnd(Instant end) {
+    this.momentEnd = end;
   }
 
   @Override
@@ -75,7 +71,7 @@ public class Activity {
       return false;
     if (getClass() != obj.getClass())
       return false;
-    Activity other = (Activity) obj;
+    Block other = (Block) obj;
     if (id == null) {
       if (other.id != null)
         return false;
@@ -86,7 +82,7 @@ public class Activity {
 
   @Override
   public String toString() {
-    return "Activity [id=" + id + ", name=" + name + ", description=" + description + ", price=" + price + "]";
+    return "Block [id=" + id + ", star=" + momentStar + ", end=" + momentEnd + "]";
   }
 
 }
